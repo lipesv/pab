@@ -1,23 +1,24 @@
 <?php
 
-error_reporting( E_ALL );
-ini_set( "display_errors", 1 );
+error_reporting ( E_ALL );
+ini_set ( "display_errors", 1 );
 
 include_once "classes/Page_Data.class.php";
 
-$pageData = new Page_Data();
-$pageData->addCSS('css/layout.css');
-$pageData->addCSS('css/navigation.css');
-$pageData->addScript("js/lightbox.js");
+$pageData = new Page_Data ();
+$pageData->addCSS ( 'css/layout.css' );
+$pageData->addCSS ( 'css/navigation.css' );
+$pageData->addScript ( "js/lightbox.js" );
+
 $pageData->title = "Dynamic image gallery";
 $pageData->content = include_once "views/navigation.php";
 
-$userClicked = isset($_GET['page']);
+$userClicked = isset ( $_GET ['page'] );
 
-if ( $userClicked ) {
-    $fileToLoad = $_GET['page'];
+if ($userClicked) {
+	$fileToLoad = $_GET ['page'];
 } else {
-    $fileToLoad = "gallery";
+	$fileToLoad = "gallery";
 }
 
 $pageData->content .= include_once "views/$fileToLoad.php";
