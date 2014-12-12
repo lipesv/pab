@@ -1,6 +1,9 @@
 <?php
 
 class Poll {
+
+	//new code: declare a new property
+	private $db;
 	
 	public function getPollData() {
 		

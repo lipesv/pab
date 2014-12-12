@@ -7,12 +7,25 @@ ini_set ( "display_errors", 1 );
 include_once 'models/Page_Data.class.php';
 $pageData = new Page_Data ();
 $pageData->title = "PHP/MySQL site poll example";
-$pageData->content .= "<h1>Everything works so far!</h1>";
 
-// new line of code to load poll controller
-$pageData->content = include_once 'controllers/poll.php';
+// new code starts here
+// database credentials
+$dbInfo = "mysql:host=localhost;dbname=playground";
+$dbUser = "root";
+$dbPassword = "Tu_)(Le#123!";
 
-// load view so model data will be merged with the page template
+try {
+	// try to create a database connection with a PDO object
+	$db = new PDO ( $dbInfo, $dbUser, $dbPassword );
+	$db->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+	$pageData->content = "<h1>We're connected</h1>";
+} catch ( Exception $e ) {
+	$pageData->content = "<h1>Connection failed!</h1><p>$e</p>";
+}
+
+// //loading poll controller again
+$pageData->content = include_once "controllers/poll.php";
+
 $page = include_once 'views/page.php';
-// output generated page
+
 echo $page;
