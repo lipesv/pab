@@ -23,7 +23,7 @@ try {
 	$pageData->content = "<h1>Connection failed!</h1><p>$e</p>";
 }
 
-// //loading poll controller again
+//loading poll controller again
 $pageData->content = include_once "controllers/poll.php";
 
 $page = include_once 'views/page.php';
