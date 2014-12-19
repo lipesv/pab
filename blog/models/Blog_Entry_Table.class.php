@@ -2,13 +2,10 @@
 
 // complete code listing for models/Blog_Entry_Table.class.php
 class Blog_Entry_Table {
-	
 	private $db;
-	
 	public function __construct($db) {
 		$this->db = $db;
 	}
-	
 	public function saveEntry($title, $entry) {
 		
 		// notice placeholders in SQL string. ? is a placeholder
@@ -29,7 +26,6 @@ class Blog_Entry_Table {
 			
 			// pass $formData as argument to execute
 			$entryStatement->execute ( $formData );
-			
 		} catch ( Exception $e ) {
 			
 			$msg = "<p>You tried to run this sql: $entrySQL</p>
@@ -37,5 +33,11 @@ class Blog_Entry_Table {
 			
 			trigger_error ( $msg );
 		}
+	}
+	public function getAllEntries() {
+		$sql = "SELECT entry_id
+					  ,title
+					  ,SUBSTRING(entry_text, 1, 150) AS intro
+  				FROM blog_entry";
 	}
 }
