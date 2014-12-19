@@ -38,12 +38,22 @@ class Blog_Entry_Table {
 			trigger_error ( $msg );
 		}
 	}
-	
 	public function getAllEntries() {
 		
 		$sql = "SELECT entry_id
 					  ,title
 					  ,SUBSTRING(entry_text, 1, 150) AS intro
   				FROM blog_entry";
+		
+		$statement = $this->db->prepare ( $sql );
+		
+		try {
+			$statement->execute ();
+		} catch ( Exception $e ) {
+			$exceptionMessage = "<p>You tried to run this sql: $sql </p>
+								 <p>Exception: $e</p>";
+		}
+		
+		return $statement;
 	}
 }
