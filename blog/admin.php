@@ -10,10 +10,6 @@ $pageData = new Page_Data ();
 $pageData->title = "PHP/MySQL blog demo";
 $pageData->addCSS ( "css/blog.css" );
 
-// code changes below here
-// comment out or delete the YES
-// $pageData->content = "<h1>YES!</h1>";
-
 // load navigation
 $pageData->content = include_once 'views/admin/admin-navigation.php';
 
