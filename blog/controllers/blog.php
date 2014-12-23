@@ -7,11 +7,11 @@ $entryTable = new Blog_Entry_Table ( $db );
 // $entries is the PDOStatement returned from getAllEntries
 $entries = $entryTable->getAllEntries ();
 
-// fetch data from the first row as a StdClass object
-$oneEntry = $entries->fetchObject ();
+// code changes start here
+// test completed - delete of comment out test code
+// $oneEntry = $entries->fetchObject();
+// $test = print_r($entryTable, true );
 
-// print the object
-$test = print_r ( $oneEntry, true );
-
-// return the printed object to index to see it in browser
-return "<pre>$test</pre>";
+// load the view
+$blogOutput = include_once 'views/list-entries-html.php';
+return $blogOutput;
