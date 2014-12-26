@@ -27,6 +27,14 @@ if ($editorSubmitted) {
 	}
 }
 
+$entryRequested = isset ( $_GET ['id'] );
+
+if ($entryRequested) {
+	$id = $_GET ['id'];
+	$entryData = $entryTable->getEntry ( $id );
+	$entryData->entry_id = $id;
+}
+
 // load relevant view
 $editorOutput = include_once 'views/admin/editor-html.php';
 return $editorOutput;
