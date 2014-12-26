@@ -1,5 +1,4 @@
 <?php
-
 $entryDataFound = isset ( $entryData );
 
 if ($entryDataFound === false) {
@@ -9,6 +8,7 @@ if ($entryDataFound === false) {
 	$entryData->title = "";
 	$entryData->entry_text = "";
 	$entryData->message = "";
+	$entryData->legend = "New Entry Submission";
 }
 
 // changes in existing code below
@@ -16,7 +16,7 @@ if ($entryDataFound === false) {
 return "<form method='post' action='admin.php?page=editor' id='editor'>
 			<input type='hidden' name='id' value='$entryData->entry_id' />
 			<fieldset>
-				<legend>New Entry Submission</legend>
+				<legend>$entryData->legend</legend>
 				<label>Title</label>
 				<input type='text' name='title' maxlength='150' value='$entryData->title' required />
 				<p id='title-warning'></p>

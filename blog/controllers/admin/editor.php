@@ -40,15 +40,25 @@ if ($entryRequested) {
 	$id = $_GET ['id'];
 	$entryData = $entryTable->getEntry ( $id );
 	$entryData->entry_id = $id;
+	$entryData->legend = "Edit Entry";
 	$entryData->message = "";
 }
 
 $entrySaved = isset ( $savedEntryId );
 
 if ($entrySaved) {
+	
 	$entryData = $entryTable->getEntry ( $savedEntryId );
-	$entryData->message = "Entry was saved";
+	
+	if ($insertNewEntry) {
+		$entryData->message = "entry was saved";
+		$entryData->legend = "New Entry Submission";
+	} elseif ($updateEntry) {
+		$entryData->message = "entry was successfully updated.";
+		$entryData->legend = "Edit Entry";
+	}
 }
 
 $editorOutput = include_once 'views/admin/editor-html.php';
+
 return $editorOutput;
