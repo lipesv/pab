@@ -38,6 +38,7 @@ class Blog_Entry_Table {
 			trigger_error ( $msg );
 		}
 	}
+	
 	public function getAllEntries() {
 		
 		$sql = "SELECT entry_id
@@ -55,5 +56,33 @@ class Blog_Entry_Table {
 		}
 		
 		return $statement;
+	}
+	
+	// partial code for models/Blog_Entry_Table.class.php
+	// declare a new method inside the class code block
+	// do not change any existing methods
+	public function getEntry($id) {
+		
+		$sql = "SELECT entry_id, title, entry_text, date_created
+				FROM blog_entry
+				WHERE entry_id = ?";
+		
+		$statement = $this->db->prepare ( $sql );
+		
+		$data = array (
+				$id 
+		);
+		
+		try {
+			$statement->execute ( $data );
+		} catch ( Exception $e ) {
+			$exceptionMessage = "<p>You tried to run this sql: $sql </p>
+								 <p>Exception: $e</p>";
+			trigger_error ( $exceptionMessage );
+		}
+		
+		$model = $statement->fetchObject ();
+		
+		return $model;
 	}
 }
