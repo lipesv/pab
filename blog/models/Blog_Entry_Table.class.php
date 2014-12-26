@@ -29,7 +29,6 @@ class Blog_Entry_Table {
 			
 			// pass $formData as argument to execute
 			$entryStatement->execute ( $formData );
-			
 		} catch ( Exception $e ) {
 			
 			$msg = "<p>You tried to run this sql: $entrySQL</p>
@@ -38,6 +37,7 @@ class Blog_Entry_Table {
 			trigger_error ( $msg );
 		}
 	}
+	
 	public function getAllEntries() {
 		
 		$sql = "SELECT entry_id
