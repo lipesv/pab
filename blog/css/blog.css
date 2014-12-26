@@ -22,3 +22,15 @@ form#editor textarea, form#editor input[type='text'] {
 form#editor textarea {
 	height: 10em;
 }
+
+/*partial code for css/blog.css*/
+form#comment-form {
+	margin-top: 2em;
+	padding-top: 0.7em;
+	border-top: 1px solid grey;
+}
+
+form#comment-form label, form#comment-form input[type='submit'] {
+	padding-top: 0.7em;
+	display: block;
+}
