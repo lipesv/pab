@@ -33,6 +33,8 @@ class Blog_Entry_Table {
 		);
 		
 		$entryStatement = $this->makeStatement ( $entrySQL, $formData );
+		
+		return $this->db->lastInsertId ();
 	}
 	
 	public function getAllEntries() {
@@ -61,5 +63,34 @@ class Blog_Entry_Table {
 		$model = $statement->fetchObject ();
 		
 		return $model;
+	}
+	
+	public function deleteEntry($id) {
+		
+		$sql = "DELETE FROM blog_entry WHERE entry_id = ?";
+		
+		$data = array (
+				$id 
+		);
+		
+		$statement = $this->makeStatement ( $sql, $data );
+	}
+	
+	public function updateEntry($id, $title, $entry) {
+		
+		$sql = "UPDATE blog_entry
+				SET title = ?
+  				   ,entry_text = ?
+				WHERE entry_id = ?";
+		
+		$data = array (
+				$title,
+				$entry,
+				$id 
+		);
+		
+		$statement = $this->makeStatement ( $sql, $data );
+		
+		return $statement;
 	}
 }
