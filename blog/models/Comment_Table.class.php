@@ -1,26 +1,34 @@
 <?php
 
-// complete code for models/Comment_Table.class.php
-class Comment_Table {
+include_once 'models/Table.class.php';
+
+class Comment_Table extends Table {
 	
-	private $db;
-	
-	public function __construct($db) {
-		$this->db = $db;
+	public function saveComment($entryId, $author, $txt) {
+		
+		$sql = "INSERT INTO comment(entry_id, author, txt)
+				VALUES (?, ?, ?)";
+		
+		$data = array (
+				$entryId,
+				$author,
+				$txt 
+		);
+		
+		$statement = $this->makeStatement ( $sql, $data );
 	}
-	
-	private function makeStatement($sql, $data = NULL) {
+	function getAllById($id) {
 		
-		$statement = $this->db->prepare ( $sql );
+		$sql = "SELECT author, txt, `date`
+  				FROM comment
+ 				WHERE entry_id = ?
+				ORDER BY comment_id DESC";
 		
-		try {
-			$statement->execute ( $data );
-		} catch ( Exception $e ) {
-			$exceptionMessage = "<p>You tried to run this sql: $sql </p>
-								 <p>Exception: $e</p>";
-			trigger_error ( $exceptionMessage );
-		}
+		$data = array (
+				$id 
+		);
 		
+		$statement = $this->makeStatement ( $sql, $data );
 		return $statement;
 	}
 }
