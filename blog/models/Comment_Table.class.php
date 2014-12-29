@@ -5,7 +5,7 @@ include_once 'models/Table.class.php';
 class Comment_Table extends Table {
 	
 	public function saveComment($entryId, $author, $txt) {
-		
+
 		$sql = "INSERT INTO comment(entry_id, author, txt)
 				VALUES (?, ?, ?)";
 		
@@ -20,8 +20,8 @@ class Comment_Table extends Table {
 		return $this->db->lastInsertId ();
 	}
 	
-	function getAllById($id) {
-
+	public function getAllById($id) {
+		
 		$sql = "SELECT author, txt, `date`
   				FROM comment
  				WHERE entry_id = ?
@@ -34,5 +34,16 @@ class Comment_Table extends Table {
 		$statement = $this->makeStatement ( $sql, $data );
 		
 		return $statement;
+	}
+	
+	public function deleteByEntryId($id) {
+		
+		$sql = "DELETE FROM comment WHERE entry_id = ?";
+		
+		$data = array (
+				$id 
+		);
+		
+		$statement = $this->makeStatement ( $sql, $data );
 	}
 }

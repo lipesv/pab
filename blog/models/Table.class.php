@@ -2,15 +2,11 @@
 
 // complete code for models/Table.class.php
 class Table {
-	
 	protected $db;
-
 	public function __construct($db) {
 		$this->db = $db;
 	}
-	
 	protected function makeStatement($sql, $data = null) {
-
 		$statement = $this->db->prepare ( $sql );
 		
 		try {

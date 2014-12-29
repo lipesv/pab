@@ -2,7 +2,6 @@
 $entryDataFound = isset ( $entryData );
 
 if ($entryDataFound === false) {
-	// default values for an empty editor
 	$entryData = new stdClass ();
 	$entryData->entry_id = 0;
 	$entryData->title = "";
@@ -11,8 +10,6 @@ if ($entryDataFound === false) {
 	$entryData->legend = "New Entry Submission";
 }
 
-// changes in existing code below
-// notice object properties used in <input> and <textarea>
 return "<form method='post' action='admin.php?page=editor' id='editor'>
 			<input type='hidden' name='id' value='$entryData->entry_id' />
 			<fieldset>
@@ -28,4 +25,11 @@ return "<form method='post' action='admin.php?page=editor' id='editor'>
 					<p id='editor-message'>$entryData->message</p>
 				</fieldset>
 			</fieldset>
-		</form>";
+		</form>
+		<script type='text/javascript' src='js/tinymce/tinymce.min.js'> </script>
+		<script type='text/javascript'>
+			tinymce.init({
+				selector: 'textarea',
+				plugins: 'image'
+			});
+		</script>";
