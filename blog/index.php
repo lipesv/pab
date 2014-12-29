@@ -16,12 +16,22 @@ $dbPassword = "Tu_)(Le#123!";
 $db = new PDO ( $dbInfo, $dbUser, $dbPassword );
 $db->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
-// changes begin here
-// comment out initial test message
-// $pageData->content .= "<h1>All is good</h1>";
-// include blog controller
-$pageData->content .= include_once 'controllers/blog.php';
-// no changes below here
+$pageRequested = isset ( $_GET ['page'] );
+
+// default controller is blog
+$controller = "blog";
+
+if ($pageRequested) {
+	
+	// if user submitted the search form
+	if ($_GET ['page'] === "search") {
+		// load the search by overwriting default controller
+		$controller = "search";
+	}
+}
+
+$pageData->content .= include_once "views/search-form-html.php";
+$pageData->content .= include_once "controllers/$controller.php";
 
 $page = include_once "views/page.php";
 echo $page;

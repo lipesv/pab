@@ -1,11 +1,10 @@
 <?php
-
 include_once 'models/Table.class.php';
 
 class Blog_Entry_Table extends Table {
 	
 	public function saveEntry($title, $entry) {
-		
+
 		$entrySQL = "INSERT INTO  simple_blog.blog_entry(title, entry_text)
 					 VALUES(?, ?)";
 		
@@ -20,12 +19,11 @@ class Blog_Entry_Table extends Table {
 	}
 	
 	public function getAllEntries() {
-		
+
 		$sql = "SELECT entry_id
 					  ,title
 					  ,SUBSTRING(entry_text, 1, 150) AS intro
   				FROM blog_entry";
-		
 		$statement = $this->makeStatement ( $sql );
 		
 		return $statement;
@@ -48,7 +46,7 @@ class Blog_Entry_Table extends Table {
 	}
 	
 	public function deleteEntry($id) {
-		
+
 		$sql = "DELETE FROM blog_entry WHERE entry_id = ?";
 		
 		$data = array (
@@ -59,7 +57,7 @@ class Blog_Entry_Table extends Table {
 	}
 	
 	public function updateEntry($id, $title, $entry) {
-		
+
 		$sql = "UPDATE blog_entry
 				SET title = ?
   				   ,entry_text = ?
@@ -70,6 +68,20 @@ class Blog_Entry_Table extends Table {
 				$entry,
 				$id 
 		);
+		
+		$statement = $this->makeStatement ( $sql, $data );
+		
+		return $statement;
+	}
+	
+	public function searchEntry($searchTerm) {
+		
+		$sql = "SELECT entry_id, title
+  				FROM blog_entry
+ 				WHERE title LIKE ? 
+ 				OR entry_text LIKE ?";
+		
+		$data = array ("%$searchTerm%", "%$searchTerm%");
 		
 		$statement = $this->makeStatement ( $sql, $data );
 		
