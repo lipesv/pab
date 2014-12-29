@@ -9,7 +9,8 @@ if ($entryDataFound === false) {
 }
 
 // properties available in $entry: entry_id, title, entry_text, date_created
-return "<article>
+return "<p><a href='index.php'>Back</a></p>
+		<article>
 			<h1>$entryData->title</h1>
 			<div class='date'>$entryData->date_created</div>
 			$entryData->entry_text

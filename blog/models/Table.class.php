@@ -3,14 +3,12 @@
 // complete code for models/Table.class.php
 class Table {
 	
-	// notice protected, not private
 	protected $db;
 
 	public function __construct($db) {
 		$this->db = $db;
 	}
 	
-	// notice protected, not private
 	protected function makeStatement($sql, $data = null) {
 
 		$statement = $this->db->prepare ( $sql );

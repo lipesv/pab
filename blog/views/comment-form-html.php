@@ -8,6 +8,7 @@ if ($idIsFound === false) {
 }
 
 return "<form action='index.php?page=blog&amp;id=$entryId' method='post' id='comment-form'>
+			<p id='comment-form-message'>$allComments->message</p>
 			<input type='hidden' name='entry-id' value='$entryId' />
 			<label>Your name</label>
 			<input type='text' name='user-name' />

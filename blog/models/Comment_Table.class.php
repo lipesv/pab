@@ -16,9 +16,12 @@ class Comment_Table extends Table {
 		);
 		
 		$statement = $this->makeStatement ( $sql, $data );
-	}
-	function getAllById($id) {
 		
+		return $this->db->lastInsertId ();
+	}
+	
+	function getAllById($id) {
+
 		$sql = "SELECT author, txt, `date`
   				FROM comment
  				WHERE entry_id = ?
@@ -29,6 +32,7 @@ class Comment_Table extends Table {
 		);
 		
 		$statement = $this->makeStatement ( $sql, $data );
+		
 		return $statement;
 	}
 }
