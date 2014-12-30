@@ -1,7 +1,7 @@
 <?php
 
-// partial code for models/Uploader.class.php
-// edit existing Uploader class
+include_once 'Util/UploadException.php';
+
 class Uploader {
 	
 	private $filename;
@@ -26,31 +26,28 @@ class Uploader {
 		
 		if ($folderIsWriteAble === false) {
 			
-			// provide a meaningful error message
 			$this->errorMessage = "Error: destination folder is ";
 			$this->errorMessage .= "not writable, change permissions";
 			
-			// indicate that code is NOT ready to upload file
 			$canUpload = false;
+		} elseif ($this->errorCode > 0) {
+			
+			throw new UploadException ( $this->errorCode );
+			$canUpload = false;
+			
 		} else {
-			// assume no other errors - indicate we're ready to upload
 			$canUpload = true;
 		}
 		
 		return $canUpload;
 	}
 	
-	// rewrite existing method save() completely
 	public function save() {
 		
-		// call the new method to look for upload errors
-		// if it returns TRUE, save the uploaded file
 		if ($this->readyToUpload ()) {
 			move_uploaded_file ( $this->fileData, "$this->destination/$this->filename" );
 		} else {
-			// if not create an exception - pass error message as argument
 			$exc = new Exception ( $this->errorMessage );
-			// throw the exception
 			throw $exc;
 		}
 	}
