@@ -8,18 +8,27 @@ function checkTitle(event) {
 	var title = document.querySelector("input[name='title']");
 	var warning = document.querySelector("form #title-warning");
 
-	// if title is empty...
 	if (title.value === "") {
-		// preventDefault, ie don't submit the form
 		event.preventDefault();
-		// display a warning
 		warning.innerHTML = "*You must write a title for the entry";
 	}
 
 }
 
+// new code: declare a new function
+function updateEditorMessage() {
+	var p = document.querySelector("#editor-message");
+	p.innerHTML = "Changes not saved!";
+}
+
 function init() {
+
 	var editorForm = document.querySelector("form#editor");
+	var title = document.querySelector("input[name='title']");
+	
+	title.required = false;
+	title.addEventListener("keyup", updateEditorMessage, false);
+
 	editorForm.addEventListener("submit", checkTitle, false);
 }
 

@@ -145,7 +145,7 @@ class Uploader {
 				if (! $extension) {
 					if (! in_array ( $ext, $this->allowedImageExtensions)) {
 						
-						$exts = implode ( ', ', $image_extensions_allowed );
+						$exts = implode ( ', ', $this->allowedImageExtensions );
 						$this->errorMessage = "You must upload a file with one of the following extensions: " . $exts;
 						
 						$canUpload = false;

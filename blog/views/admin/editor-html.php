@@ -1,4 +1,6 @@
 <?php
+
+
 $entryDataFound = isset ( $entryData );
 
 if ($entryDataFound === false) {
@@ -15,7 +17,7 @@ return "<form method='post' action='admin.php?page=editor' id='editor'>
 			<fieldset>
 				<legend>$entryData->legend</legend>
 				<label>Title</label>
-				<input type='text' name='title' maxlength='150' value='$entryData->title' required />
+				<input type='text' name='title' maxlength='150' value='".htmlspecialchars ( $entryData->title, ENT_QUOTES )."' required />
 				<p id='title-warning'></p>
 				<label>Entry</label>
 				<textarea name='entry'>$entryData->entry_text</textarea>
@@ -30,6 +32,11 @@ return "<form method='post' action='admin.php?page=editor' id='editor'>
 		<script type='text/javascript'>
 			tinymce.init({
 				selector: 'textarea',
-				plugins: 'image'
+				plugins: 'image',
+				setup: function (editor) {
+					editor.on ('change', function (e) {
+						updateEditorMessage();
+					});
+				}
 			});
 		</script>";
